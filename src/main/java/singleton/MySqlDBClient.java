@@ -1,6 +1,5 @@
 package singleton;
 
-import com.mongodb.client.MongoClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,10 +23,16 @@ public class MySqlDBClient {
     public static MySqlDBClient client = null;
     private Connection connection;
 
+    /**
+     * Builds an instance of {@link MySqlDBClient}.
+     */
     private MySqlDBClient() {
         this.initializeMysqlDbClient();
     }
 
+    /**
+     * Initialize the Mysql DB client.
+     */
     private void initializeMysqlDbClient() {
         try {
             logger.info("Initializing the mysql client!!");
@@ -38,6 +43,11 @@ public class MySqlDBClient {
         }
     }
 
+    /**
+     * Gets the client.
+     *
+     * @return The client
+     */
     public static MySqlDBClient getClient() {
         if (Objects.isNull(client)) {
             client = new MySqlDBClient();
@@ -46,6 +56,11 @@ public class MySqlDBClient {
         return client;
     }
 
+    /**
+     * Gets the data (Returns the current timestamp).
+     *
+     * @return The data
+     */
     public long getData() {
         long timestamp = 0;
         try {
